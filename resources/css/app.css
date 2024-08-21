@@ -1,0 +1,33 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+@layer base {
+    a {
+        @apply underline;
+        @apply hover:text-app-color
+    }
+
+    hr {
+        @apply h-px;
+        @apply my-4
+    }
+
+    footer>nav>ul>li {
+        @apply md:after:content-['|'];
+        @apply md:after:mx-2;
+    }
+
+    footer>nav>ul>li:last-child {
+        @apply md:after:content-none;
+    }
+
+    iframe {
+        @apply w-full;
+        @apply max-h-screen;
+        @apply rounded-lg;
+        @apply my-4;
+        @apply aspect-[1/1.4]
+    }
+}
