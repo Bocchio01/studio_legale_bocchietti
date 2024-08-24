@@ -7,14 +7,22 @@
     <section>
 
         <p>
-            Di seguito i curricula degli avvocati presenti nello {{ formatHelper::rendersStudioLegaleBocchietti() }}
-            (cliccare sui nomi per visualizzare i relativi file):
+            Di seguito i curricula degli avvocati presenti nello {{ formatHelper::rendersStudioLegaleBocchietti() }}:
         </p>
 
-        <x-treefolder :items="$fileNameList" />
+        <x-treeview :data="$curriculaObj" />
+
+        @isset($fileURL)
+            <p class="text-center my-7">
+                <a href="{{ $fileURL }}" class="bg-app-color rounded-full p-2 text-white hover:text-black"
+                    target="_blank">
+                    Scarica il file visualizzato
+                </a>
+            </p>
+        @endisset
 
         @isset($fileID)
-            <iframe src="https://drive.google.com/file/d/{{ $fileID }}/preview"></iframe>
+            <iframe class="my-5" src="https://drive.google.com/file/d/{{ $fileID }}/preview"></iframe>
         @endisset
 
     </section>

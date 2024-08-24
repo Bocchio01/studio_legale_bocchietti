@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\GoogleDriveHelper;
 
 class VademecumController extends Controller
 {
@@ -15,23 +16,15 @@ class VademecumController extends Controller
      */
     public function index(Request $request): Response
     {
-        $googleDisk = Storage::disk('google');
+        $vademecumObj = array(GoogleDriveHelper::create_folder_structure(self::$basePath));
 
-        // $filePathList = $googleDisk->listContents(self::$basePath);
-
-        $filePathList = $googleDisk->files(self::$basePath);
-        $fileNameList = array_map(function($filePath) {
-            return str_replace(self::$basePath, '', $filePath);
-        }, $filePathList);
-
-        $fileUrl = $googleDisk->url($request->fileName ? self::$basePath . $request->fileName : $filePathList[0]);
-        $parsedUrl = parse_url($fileUrl);
-        parse_str($parsedUrl['query'], $queryParams);
-        $fileID = $queryParams['id'] ?? null;
+        $fileID = $request->input('ID') ?? '11EGxOU9MwVln8nGce_iBQahuEkldIkPf';
+        $fileURL = GoogleDriveHelper::findUrlById($vademecumObj[0], $fileID);
 
         return response()->view('pages.vademecum', [
-            'fileNameList' => $fileNameList,
+            'vademecumObj' => $vademecumObj,
             'fileID' => $fileID,
+            'fileURL' => $fileURL,
         ]);
     }
 }

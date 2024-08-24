@@ -27,7 +27,6 @@
         @apply w-full;
         @apply max-h-screen;
         @apply rounded-lg;
-        @apply my-4;
         @apply aspect-[1/1.4]
     }
 }
