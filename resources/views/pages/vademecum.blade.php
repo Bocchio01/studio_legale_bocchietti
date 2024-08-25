@@ -15,8 +15,7 @@
 
         @isset($fileURL)
             <p class="text-center my-7">
-                <a href="{{ $fileURL }}" class="bg-app-color rounded-full p-2 text-white hover:text-black"
-                    target="_blank">
+                <a href="{{ $fileURL }}" class="bg-sky-900 rounded-full py-2 px-4 text-white" target="_blank">
                     Scarica il file visualizzato
                 </a>
             </p>
